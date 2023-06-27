@@ -1,5 +1,9 @@
-from django.test import TestCase
+import os
 
+from django.test import TestCase
+from django.urls import reverse
+
+from .models import Post
 from .models import User
 
 
@@ -32,3 +36,28 @@ class UserTestCase(TestCase):
         self.assertEqual(suggested_followers[0], self.user5)
         self.assertEqual(suggested_followers[1], self.user6)
         self.assertNotIn(self.user1, suggested_followers)
+
+
+class SearchViewTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.client.login(username='testuser', password='testpassword')
+        self.user.profile_pic = os.path.join("..", "static", "images", "no_pic.png")
+        self.user.cover = os.path.join("..", "static", "images", "no_cover.jpeg")
+        self.user.save()
+
+    def test_search_with_query(self):
+        Post.objects.create(creator=self.user, content_text='Hello world')
+        Post.objects.create(creator=self.user, content_text='Test post')
+        response = self.client.get(reverse('search'), {'query': 'hello'})
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertContains(response, 'Hello world')
+        self.assertNotContains(response, 'Test post')
+
+    def test_search_without_query(self):
+        response = self.client.get(reverse('search'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search.html')
+        self.assertNotContains(response, 'Hello world')
+        self.assertNotContains(response, 'Test post')
