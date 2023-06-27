@@ -33,7 +33,7 @@
                                                      style="background-image: url({{ other_participant.profile_pic.url }})"></div>
                                             </div>
                                             <div class="chat-content">
-                                                <h6 class="new-message">{{ chat.messages.last.content }}</h6>
+                                                <h6 class="new-message">{{ chat.messages.last.sender.username }}: {{ chat.messages.last.content }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -59,7 +59,7 @@
                                                      style="background-image: url({{ other_participant.profile_pic.url }})"></div>
                                             </div>
                                             <div class="chat-content">
-                                                <h6 class="new-message">{{ chat.messages.last.content }}</h6>
+                                                <h6 class="new-message">{{ chat.messages.last.sender.username }}: {{ chat.messages.last.content }}</h6>
                                             </div>
                                         </div>
                                     </div>

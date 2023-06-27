@@ -620,7 +620,7 @@ svg {
 .right-div {
     background-color: rgba(62, 57, 65, 0.25);
     width: 30%;
-    height: 100%;
+    border-radius: 20px;
 }
 
 #s-box {
@@ -632,6 +632,6 @@ svg {
     border-radius: 20px;
 }
 
-#home-posts-div{
+#home-posts-div {
     margin-top: 40px;
 }

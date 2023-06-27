@@ -8,6 +8,9 @@ def script():
     users = User.objects.all()
     posts = Post.objects.all()
     Comment.objects.all().delete()
+    Chat.objects.all().delete()
+    Message.objects.all().delete()
+
     for post in posts:
         post.savers.clear()
         post.likers.clear()
@@ -33,3 +36,25 @@ def script():
                 comment.save()
                 post.comment_count += 1
                 post.save()
+
+        # Creazione di una chat con due partecipanti
+        chat = Chat.objects.create()
+        chat.participants.add(user)
+
+        # Aggiunta di un altro partecipante casuale alla chat
+        other_participants = users.exclude(id=user.id)
+        participant = random.choice(list(other_participants))
+        chat.participants.add(participant)
+
+        chat.save()
+
+        num_messages = random.randint(1, 10)
+        for _ in range(num_messages):
+            sender = random.choice(list(chat.participants.all()))
+            content = "This is a random message."
+            message = Message(chat=chat, sender=sender, content=content)
+            message.save()
+
+        print(f"Chat created for user {user.username} and {num_messages} messages.")
+
+    print("Script completed.")
