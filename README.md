@@ -9,12 +9,13 @@ Il tema del Sito Web è un social network con le funzionalità di base.
 
 ### Screenshots:
 
+* <img width="1483" alt="Screenshot_1" src="https://github.com/Ayoubimad/SocialWebSite/assets/82643685/8a975cef-3204-4b6d-9826-0ba00c481a3b">
+
+* <img width="1481" alt="Screenshot_2" src="https://github.com/Ayoubimad/SocialWebSite/assets/82643685/0a8d91b8-b5e8-4566-ae5f-3e87a7b41cf4">
 
 
 ## Guida all'installazione:
 
-* <img width="1483" alt="Screenshot_1" src="https://github.com/Ayoubimad/SocialWebSite/assets/82643685/8a975cef-3204-4b6d-9826-0ba00c481a3b">
-* <img width="1481" alt="Screenshot_2" src="https://github.com/Ayoubimad/SocialWebSite/assets/82643685/0a8d91b8-b5e8-4566-ae5f-3e87a7b41cf4">
 
 ## Frameworks and languages used:
 
