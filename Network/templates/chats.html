@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+{% load static %}
+<div class="main-div-content">
+    {% block chats %}
+        <header class="py-5" id="home-header">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-5 fw-bolder"> Chats</h1>
+                </div>
+            </div>
+        </header>
+        {% for chat in chats %}
+            {% if chat.messages.count > 0 %}
+                {% with participants=chat.participants.all %}
+                    {% if participants.count == 2 %}
+                        {% if participants.0 != request.user %}
+                            {% with other_participant=participants.0 %}
+                                <a data-toggle="modal"
+                                   data-target="#chatModal" onclick="get_messages('{{ chat.id }}')">
+                                    <div class="chat" data-chat_id="{{ chat.id }}">
+                                        <div style="flex: 1">
+                                            <div class="chat-main">
+                                                <div class="chat-user">
+                                                    <div>
+                                                        <span style="margin-left: 0"><strong>{{ other_participant.first_name }} {{ other_participant.last_name }}</strong></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <div class="small-profilepic"
+                                                     style="background-image: url({{ other_participant.profile_pic.url }})"></div>
+                                            </div>
+                                            <div class="chat-content">
+                                                <h6 class="new-message">{{ chat.messages.last.content }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endwith %}
+                        {% else %}
+                            {% with other_participant=participants.1 %}
+                                <a data-toggle="modal"
+                                   data-target="#chatModal" onclick="get_messages('{{ chat.id }}')">
+                                    <div class="chat" data-chat_id="{{ chat.id }}">
+                                        <div style="flex: 1">
+                                            <div class="chat-main">
+                                                <div class="chat-user">
+                                                    <div>
+                                                        <span><strong>{{ other_participant.first_name }} {{ other_participant.last_name }}</strong></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <div class="small-profilepic"
+                                                     style="background-image: url({{ other_participant.profile_pic.url }})"></div>
+                                            </div>
+                                            <div class="chat-content">
+                                                <h6 class="new-message">{{ chat.messages.last.content }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endwith %}
+                        {% endif %}
+                    {% endif %}
+                {% endwith %}
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+</div>

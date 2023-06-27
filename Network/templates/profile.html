@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% load static %}
+<div class="main-div-content">
+    {% block profile %}
+        <div class="profile-view" data-user="{{ us.username }}">
+            <div class="cover-image" style="background-image: url({{ us.cover.url }});"></div>
+            <div class="profile-image" style="background-image: url({{ us.profile_pic.url }});"></div>
+            <div class="profile-details">
+                <div class="details-data">
+                    <div>
+                        {% if user.username == us.username %}
+                            <a href="{% url 'edit_profile' %}">
+                                <button class="btn btn-outline-success float-right" id="edit-profile-btn">Edit
+                                    Profile
+                                </button>
+                            </a>
+                        {% else %}
+                            {% csrf_token %}
+                            {% if us in user.follows.all %}
+                                <a href="{% url 'follow_unfollow' us.pk %}">
+                                    <button class="btn btn-success float-right" id="following-btn">
+                                        Following
+                                    </button>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'follow_unfollow' us.pk %}">
+                                    <button class="btn btn-outline-success float-right" id="follow-btn">
+                                        Follow
+                                    </button>
+                                </a>
+                            {% endif %}
+                            <button class="btn btn-success float-right" id="following-btn"
+                                    data-toggle="modal" data-target="#chatModal"
+                                    onclick="get_messages('{{ chat.id }}')">
+                                Send message
+                            </button>
+                        {% endif %}
+                    </div>
+                    <h5>{{ us.first_name }} {{ us.last_name }}</h5>
+                    <div class="grey">@{{ us.username }}</div>
+                    <div class="bio">
+                        {% if us.bio is not None %}
+                            {{ us.bio }}
+                        {% endif %}
+                    </div>
+                    <div>
+                        &nbsp;<span class="grey">Followers</span>
+                        <strong>
+                            {{ us.followed_by.count }}
+                        </strong>
+                        <span class="grey">Following</span>
+                        <strong>
+                            {{ us.follows.count }}
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="space"></div>
+        {% include 'posts.html' %}
+    {% endblock %}
+</div>

@@ -1,0 +1,103 @@
+{% load static %}
+<div class="sidenav">
+    <a href="{% url 'home' %}" class="navbar-brand">
+        <img src="{% static 'images/logo_icon.png' %}" height="31px">
+    </a>
+    <div style="height: 100%;">
+        <div>
+            <div>
+                <ul>
+                    <li class="nav-item" id="all_posts">
+                        <a href="{% url 'home' %}" class="nav-link">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-slack" viewBox="0 0 16 16">
+                                    <path d="M3.362 10.11c0 .926-.756 1.681-1.681 1.681S0 11.036 0 10.111C0 9.186.756 8.43 1.68 8.43h1.682v1.68zm.846 0c0-.924.756-1.68 1.681-1.68s1.681.756 1.681 1.68v4.21c0 .924-.756 1.68-1.68 1.68a1.685 1.685 0 0 1-1.682-1.68v-4.21zM5.89 3.362c-.926 0-1.682-.756-1.682-1.681S4.964 0 5.89 0s1.68.756 1.68 1.68v1.682H5.89zm0 .846c.924 0 1.68.756 1.68 1.681S6.814 7.57 5.89 7.57H1.68C.757 7.57 0 6.814 0 5.89c0-.926.756-1.682 1.68-1.682h4.21zm6.749 1.682c0-.926.755-1.682 1.68-1.682.925 0 1.681.756 1.681 1.681s-.756 1.681-1.68 1.681h-1.681V5.89zm-.848 0c0 .924-.755 1.68-1.68 1.68A1.685 1.685 0 0 1 8.43 5.89V1.68C8.43.757 9.186 0 10.11 0c.926 0 1.681.756 1.681 1.68v4.21zm-1.681 6.748c.926 0 1.682.756 1.682 1.681S11.036 16 10.11 16s-1.681-.756-1.681-1.68v-1.682h1.68zm0-.847c-.924 0-1.68-.755-1.68-1.68 0-.925.756-1.681 1.68-1.681h4.21c.924 0 1.68.756 1.68 1.68 0 .926-.756 1.681-1.68 1.681h-4.21z"/>
+                                </svg>
+                                &nbsp;&nbsp;Home
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="library">
+                        <a href="{% url 'search' %}" class="nav-link">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                                    <path d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1h-1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4h4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14H1zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14H9zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5V3z"/>
+                                </svg>
+                                &nbsp;&nbsp;Search
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="library">
+                        <a href="{% url 'saved' %}" class="nav-link">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-bookmarks-fill" viewBox="0 0 16 16">
+                                    <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4z"/>
+                                    <path d="M4.268 1A2 2 0 0 1 6 0h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L13 13.768V2a1 1 0 0 0-1-1H4.268z"/>
+                                </svg>
+                                &nbsp;&nbsp;Saved
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="profile">
+                        <a href="{% url 'chats' %}" class="nav-link">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-chat-fill" viewBox="0 0 16 16">
+                                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+                                </svg>
+                                &nbsp;&nbsp;Chats
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="profile">
+                        <a href="{% url 'profile' user.username %}" class="nav-link">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                </svg>
+                                &nbsp;&nbsp;Profile
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="logout">
+                        <a href="{% url 'logout' %}" class="nav-link">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                                    <path fill-rule="evenodd"
+                                          d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                                </svg>
+                                &nbsp;&nbsp;Log Out
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button id="popup-btn" class="btn btn-success new-post-btn" data-toggle="modal" data-target="#createPostModal">
+            Create Post
+        </button>
+        <div style="position: absolute; bottom: 10px;">
+            <li class="nav-item sidenav-user">
+                <a href="{% url 'profile' user.username %}" class="nav-link">
+                    <div class="user_account">
+                        <div class="small-profilepic"
+                             style="float: left; background-image: url({{ user.profile_pic.url }});"></div>
+                        <div style="height: 2.7vw; margin: auto;">
+                            <div style="margin-top: 4px;">
+                                <strong>{{ user.first_name }} {{ user.last_name }}</strong></div>
+                            <div class="grey" style="margin-top: 4px;">@{{ user.username }}</div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <input type="hidden" id="user_is_authenticated" value="True" data-username='{{ user.username }}'>
+        </div>
+    </div>
+</div>

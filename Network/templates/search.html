@@ -1,0 +1,94 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block search %}
+    <header class="py-5" id="home-header">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-5 fw-bolder">What do you wanna see?</h1>
+            </div>
+        </div>
+    </header>
+    <div class="main-div-content" id="home-main-div-content">
+        <div class="content-wrapper">
+            <div class="left-div">
+                <nav class="head">
+                    <form action="{% url 'search' %}" method="GET">
+                        {% csrf_token %}
+                        <div class="search-div">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </div>
+                            <input type="text" name="query" id="search-box"
+                                   placeholder="Are you looking for a new friend?">
+                        </div>
+                    </form>
+                </nav>
+                {% if users.count > 0 %}
+                    <header class="py-1" id="search-header">
+                        <div class="container">
+                            <div class="text-center text-white">
+                                <h1 class="display-5"> Are you looking for...?</h1>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="suggestion-box">
+                        {% for us in users %}
+                            <div class="suggestion-user">
+                                <div>
+                                    <a href="{% url 'profile' us.username %}">
+                                        <div class="small-profilepic"
+                                             style="background-image: url({{ us.profile_pic.url }})"></div>
+                                    </a>
+                                </div>
+                                <div class="user-details">
+                                    <a href="{% url 'profile' us.username %}">
+                                        <div id="user-name">
+                                            <strong>
+                                                {{ us.first_name }} {{ us.last_name }}
+                                            </strong>
+                                        </div>
+                                        <div class="grey">@{{ us.username }}</div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div id="home-posts-div">
+                    {% include 'posts.html' %}
+                </div>
+            </div>
+            <div class="right-div">
+                <div class="right-suggestion-div">
+                    <header class="py-1" id="s-header">
+                        <div class="container px-1 px-lg-1 my-1">
+                            <div class="text-center text-white">
+                                <h1 class="display-5 fw-bolder">You might know:</h1>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="suggestion">
+                        {% for suggestion in suggestions %}
+                            <li class="suggestion-item suggestion-user" id="s-box">
+                                <a href="{% url 'profile' suggestion.username %}" class="nav-link">
+                                    <div class="user_account">
+                                        <div class="small-profilepic"
+                                             style="float: left; background-image: url({{ suggestion.profile_pic.url }});"></div>
+                                        <div style="height: 2.7vw; margin: auto;">
+                                            <div style="margin-top: 4px;">
+                                                <strong>{{ suggestion.first_name }} {{ suggestion.last_name }}</strong></div>
+                                            <div class="grey" style="margin-top: 4px;">@{{ suggestion.username }}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

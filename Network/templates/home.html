@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block home %}
+    <header class="py-5" id="home-header">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-5 fw-bolder"> Enjoy the network</h1>
+            </div>
+        </div>
+    </header>
+    <div class="main-div-content">
+        {% include 'posts.html' %}
+    </div>
+{% endblock %}
