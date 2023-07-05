@@ -28,7 +28,6 @@ class User(AbstractUser):
             followed_by__in=followed_users)
         suggested_users = suggested_users.annotate(num_my_followers=Count('followed_by__follows')).order_by(
             '-num_my_followers')[:5]
-        print('Suggested users are: ' + str(suggested_users))
         return suggested_users
 
 

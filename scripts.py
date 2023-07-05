@@ -15,6 +15,7 @@ def script():
         post.savers.clear()
         post.likers.clear()
         post.comment_count = 0
+        post.date_created = timezone.now()
         post.save()
 
     for user in users:
@@ -37,11 +38,9 @@ def script():
                 post.comment_count += 1
                 post.save()
 
-        # Creazione di una chat con due partecipanti
         chat = Chat.objects.create()
         chat.participants.add(user)
 
-        # Aggiunta di un altro partecipante casuale alla chat
         other_participants = users.exclude(id=user.id)
         participant = random.choice(list(other_participants))
         chat.participants.add(participant)

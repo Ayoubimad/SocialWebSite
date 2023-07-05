@@ -18,7 +18,7 @@ from .models import *
 def home(request):
     user = request.user
     followed_users = user.follows.all()
-    start_date = timezone.now() - timedelta(days=2)
+    start_date = timezone.now() - timedelta(days=1)
     posts = Post.objects.filter(creator__in=followed_users, date_created__gte=start_date).order_by("-date_created")
     context = {
         'user': user,
@@ -166,6 +166,7 @@ def search(request):
         return render(request=request, template_name='search.html', context={
             'users': users,
             'posts': posts,
+            'suggestions': suggestions
         })
 
     return render(request=request, template_name='search.html', context={
