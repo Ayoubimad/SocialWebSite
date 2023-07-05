@@ -61,38 +61,40 @@
                     {% include 'posts.html' %}
                 </div>
             </div>
-            {% if suggestions.count > 0 %}
-                <div class="right-div">
-                    <div class="right-suggestion-div">
-                        <header class="py-1" id="s-header">
-                            <div class="container px-1 px-lg-1 my-1">
-                                <div class="text-center text-white">
+            <div class="right-div">
+                <div class="right-suggestion-div">
+                    <header class="py-1" id="s-header">
+                        <div class="container px-1 px-lg-1 my-1">
+                            <div class="text-center text-white">
+                                {% if suggestions.count > 0 %}
                                     <h1 class="display-5 fw-bolder">You might know:</h1>
-                                </div>
+                                {% else %}
+                                    <h1 class="display-5 fw-bolder">No suggestions are avalaible</h1>
+                                {% endif %}
                             </div>
-                        </header>
-                        <div class="suggestion">
-                            {% for suggestion in suggestions %}
-                                <li class="suggestion-item suggestion-user" id="s-box">
-                                    <a href="{% url 'profile' suggestion.username %}" class="nav-link">
-                                        <div class="user_account">
-                                            <div class="small-profilepic"
-                                                 style="float: left; background-image: url({{ suggestion.profile_pic.url }});"></div>
-                                            <div style="height: 2.7vw; margin: auto;">
-                                                <div style="margin-top: 4px;">
-                                                    <strong>{{ suggestion.first_name }} {{ suggestion.last_name }}</strong>
-                                                </div>
-                                                <div class="grey" style="margin-top: 4px;">
-                                                    @{{ suggestion.username }}</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            {% endfor %}
                         </div>
+                    </header>
+                    <div class="suggestion">
+                        {% for suggestion in suggestions %}
+                            <li class="suggestion-item suggestion-user" id="s-box">
+                                <a href="{% url 'profile' suggestion.username %}" class="nav-link">
+                                    <div class="user_account">
+                                        <div class="small-profilepic"
+                                             style="float: left; background-image: url({{ suggestion.profile_pic.url }});"></div>
+                                        <div style="height: 2.7vw; margin: auto;">
+                                            <div style="margin-top: 4px;">
+                                                <strong>{{ suggestion.first_name }} {{ suggestion.last_name }}</strong>
+                                            </div>
+                                            <div class="grey" style="margin-top: 4px;">
+                                                @{{ suggestion.username }}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
                     </div>
                 </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

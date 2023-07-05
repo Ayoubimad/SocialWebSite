@@ -10,8 +10,19 @@ def script():
     Comment.objects.all().delete()
     Chat.objects.all().delete()
     Message.objects.all().delete()
+    Category.objects.all().delete()
+
+    category_names = ["GoodDay", "SunnyDay", "Black"]
+    for name in category_names:
+        Category.objects.create(name=name)
 
     for post in posts:
+        categories = random.sample(list(Category.objects.all()),
+                                   random.randint(1, 3))
+        for category in categories:
+            category.name = random.choice(category_names)
+            category.save()
+        post.categories.set(categories)
         post.savers.clear()
         post.likers.clear()
         post.comment_count = 0

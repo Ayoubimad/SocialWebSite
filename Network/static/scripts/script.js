@@ -335,3 +335,61 @@ function resetCommentModal() {
     document.getElementById("comment-text").value = "";
     document.getElementById("comments-div").innerHTML = "";
 }
+
+function edit_post(element) {
+    let postId = element.getAttribute("data-post_id");
+    let editPostModel = document.getElementById("editPostModal");
+    editPostModel.setAttribute("post-id", postId);
+    document.getElementById("edit-post-text").value = document.querySelector("[data-post_id='" + postId + "'] .post-content").textContent.trim();
+}
+
+function delete_post() {
+    const element = document.getElementById('editPostModal');
+    let post_id = element.getAttribute("post-id");
+    const data = {
+        'post_id': post_id
+    };
+    fetch('/delete_post/', {
+        method: 'PUT',
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log(response.status)
+                document.querySelector("[data-post_id='" + post_id + "'] ").remove()
+                $('#editPostModal').modal('hide')
+            } else {
+                throw new Error('Failed removing post...');
+            }
+        })
+        .catch(error => {
+            console.log('Error occurred while removing post:', error);
+        });
+}
+
+function edit() {
+    const element = document.getElementById('editPostModal');
+    let post_id = element.getAttribute("post-id");
+    let contentText = document.getElementById("edit-post-text").value;
+    const data = {
+        'contentText': contentText,
+        'post_id': post_id
+    };
+    fetch('/edit_post/', {
+        method: 'PUT',
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log(response.status)
+                document.querySelector("[data-post_id='" + post_id + "'] .post-content").textContent = contentText;
+                $('#editPostModal').modal('hide')
+            } else {
+                throw new Error('Failed editing post...');
+            }
+        })
+        .catch(error => {
+            console.log('Error occurred while editing post:', error);
+        });
+}
+

@@ -159,8 +159,14 @@ def search(request):
             Q(username__icontains=query)
         ).exclude(id=request.user.id)
 
+        query_without_hashtag = query.replace('#', '')
+
+        categories = Category.objects.filter(
+            name=query_without_hashtag
+        )
+
         posts = Post.objects.filter(
-            Q(content_text__icontains=query)
+            Q(categories__in=categories)
         ).order_by('-date_created')
 
         return render(request=request, template_name='search.html', context={
@@ -240,10 +246,30 @@ def create_post(request):
         pic = request.FILES.get('picture')
         try:
             if text != '' or pic is not None:
-                Post.objects.create(creator=request.user, content_text=text, content_image=pic)
+                post = Post.objects.create(creator=request.user, content_text=text, content_image=pic)
+                words = text.split()
+                hashtags = [word[1:] for word in words if word.startswith('#')]
+                for hashtag in hashtags:
+                    category, created = Category.objects.get_or_create(name=hashtag)
+                    category.posts.add(post)
         except Exception:
             redirect('profile', request.user.username)
         return redirect(request.META.get('HTTP_REFERER'))
+
+
+@csrf_exempt
+def edit_post(request):
+    if request.method == 'PUT':
+        try:
+            data = json.loads(request.body)
+            post_id = int(data["post_id"])
+            contentText = data["contentText"]
+            post = get_object_or_404(Post, id=post_id)
+            post.content_text = contentText
+            post.save()
+            return HttpResponse(status=200)
+        except:
+            return HttpResponse(status=500)
 
 
 @csrf_exempt
@@ -323,5 +349,18 @@ def add_message(request):
                 return JsonResponse(message.serialize(), safe=False)
             else:
                 return HttpResponse(status=203)
+        except:
+            return HttpResponse(status=500)
+
+
+@csrf_exempt
+def delete_post(request):
+    if request.method == 'PUT':
+        try:
+            data = json.loads(request.body)
+            post_id = int(data["post_id"])
+            post = get_object_or_404(Post, id=post_id)
+            post.delete()
+            return HttpResponse(status=200)
         except:
             return HttpResponse(status=500)

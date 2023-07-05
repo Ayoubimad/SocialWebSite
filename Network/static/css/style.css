@@ -402,11 +402,17 @@ svg {
 }
 
 /******Modal Create Post*******/
-#post-text {
+#post-text, #edit-post-text {
     width: 100%;
     border-radius: 10px;
     border: none;
     margin-top: 10px;
+    resize: none;
+    overflow: hidden;
+    outline: none;
+}
+
+#edit-post-text:active, #edit-post-text:focus {
     resize: none;
     overflow: hidden;
     outline: none;

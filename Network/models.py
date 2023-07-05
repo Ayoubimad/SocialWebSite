@@ -44,6 +44,14 @@ class Post(models.Model):
         return f"Post ID: {self.id} (creator: {self.creator})"
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=255, default='')
+    posts = models.ManyToManyField(Post, related_name='categories')
+
+    def __str__(self):
+        return self.name
+
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commenters')
