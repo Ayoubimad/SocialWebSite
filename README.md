@@ -21,6 +21,9 @@ Il tema del Sito Web è un social network con le funzionalità di base.
 
 ## Guida all'installazione:
 
+##### $ pipenv shell #####
+##### $ pip install -r requirements.txt #####
+##### $ python manage.py runserver #####
 
 ## Frameworks e linguaggi utilizzati:
 
