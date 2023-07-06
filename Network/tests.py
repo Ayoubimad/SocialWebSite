@@ -1,18 +1,7 @@
-import os
-
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import Post
-from .models import User
-
-
-# Suggestions Test:
-# user1 --> user2,user3,user4
-# user2 --> user5
-# user3 --> user5,user6
-# user4 --> user1,user2
-# user5 --> user1, user3
+from .models import Post, User
 
 
 class UserTestCase(TestCase):
@@ -23,7 +12,6 @@ class UserTestCase(TestCase):
         self.user4 = User.objects.create(username='user4')
         self.user5 = User.objects.create(username='user5')
         self.user6 = User.objects.create(username='user6')
-
         self.user1.follows.add(self.user2, self.user3, self.user4)
         self.user2.follows.add(self.user5)
         self.user3.follows.add(self.user5, self.user6)
@@ -38,26 +26,20 @@ class UserTestCase(TestCase):
         self.assertNotIn(self.user1, suggested_followers)
 
 
-class SearchViewTest(TestCase):
+class LikeUnlikePostViewTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.post = Post.objects.create(creator=self.user)
+
+    def test_like_post(self):
         self.client.login(username='testuser', password='testpassword')
-        self.user.profile_pic = os.path.join("..", "static", "images", "no_pic.png")
-        self.user.cover = os.path.join("..", "static", "images", "no_cover.jpeg")
-        self.user.save()
-
-    def test_search_with_query(self):
-        Post.objects.create(creator=self.user, content_text='Hello world')
-        Post.objects.create(creator=self.user, content_text='Test post')
-        response = self.client.get(reverse('search'), {'query': 'hello'})
+        response = self.client.put(reverse('like_post', args=[self.post.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertContains(response, 'Hello world')
-        self.assertNotContains(response, 'Test post')
+        self.assertIn(self.user, self.post.likers.all())
 
-    def test_search_without_query(self):
-        response = self.client.get(reverse('search'))
+    def test_unlike_post(self):
+        self.client.login(username='testuser', password='testpassword')
+        self.post.likers.add(self.user)
+        response = self.client.put(reverse('unlike_post', args=[self.post.pk]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'search.html')
-        self.assertNotContains(response, 'Hello world')
-        self.assertNotContains(response, 'Test post')
+        self.assertNotIn(self.user, self.post.likers.all())
