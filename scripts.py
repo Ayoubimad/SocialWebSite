@@ -65,6 +65,4 @@ def script():
             message = Message(chat=chat, sender=sender, content=content)
             message.save()
 
-        print(f"Chat created for user {user.username} and {num_messages} messages.")
-
     print("Script completed.")

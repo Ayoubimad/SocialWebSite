@@ -94,7 +94,8 @@
                                 </div>
                             {% endif %}
                             {% if post.creator == user %}
-                                <div class="save" onclick="edit_post(this)" data-post_id="{{ post.id }}" data-toggle="modal" data-target="#editPostModal">
+                                <div class="save" onclick="edit_post(this)" data-post_id="{{ post.id }}"
+                                     data-toggle="modal" data-target="#editPostModal">
                                     <div class="svg-span">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -111,4 +112,6 @@
             </div>
         </div>
     {% endfor %}
+    <br>
+    <br>
 {% endblock %}

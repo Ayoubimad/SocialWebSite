@@ -379,24 +379,24 @@ svg {
 
 .post-actions .like:hover .svg-span {
     color: #060606;
-    background-color: #f3e3eb;
-    box-shadow: 0 0 0 3px #f3e3eb;
+    background-color: #c2c0c0;
+    box-shadow: 0 0 0 3px #c2c0c0;
     transition-duration: .2s;
     cursor: pointer;
 }
 
 .post-actions .save:hover .svg-span {
     color: #060606;
-    background-color: #def2eb;
-    box-shadow: 0 0 0 3px #def2eb;
+    background-color: #c2c0c0;
+    box-shadow: 0 0 0 3px #c2c0c0;
     transition-duration: .2s;
     cursor: pointer;
 }
 
 .post-actions .comment:hover .svg-span {
     color: #060606;
-    background-color: #def2eb;
-    box-shadow: 0 0 0 3px #def2eb;
+    background-color: #c2c0c0;
+    box-shadow: 0 0 0 3px #c2c0c0;
     transition-duration: .2s;
     cursor: pointer;
 }
