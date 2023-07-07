@@ -27,7 +27,7 @@ class User(AbstractUser):
         suggested_users = User.objects.exclude(id=self.id).exclude(id__in=followed_users).filter(
             followed_by__in=followed_users)
         suggested_users = suggested_users.annotate(num_my_followers=Count('followed_by__follows')).order_by(
-            '-num_my_followers')[:5]
+            '-num_my_followers')[:4]
         return suggested_users
 
 
