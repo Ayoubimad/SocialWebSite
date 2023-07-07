@@ -9,6 +9,7 @@
                 </div>
             </div>
         </header>
+        <br>
         {% for chat in chats %}
             {% if chat.messages.count > 0 %}
                 {% with participants=chat.participants.all %}

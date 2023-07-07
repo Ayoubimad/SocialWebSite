@@ -6,6 +6,9 @@
     <link href="{% static 'css/login_style.css' %}" rel="stylesheet">
 {% endblock %}
 {% block edit_profile %}
+    <br>
+    <br>
+    <br>
     <div class="user-box" style="margin-top: 6vh;">
         <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}

@@ -257,6 +257,8 @@ function sendMessage() {
             messagesDiv.appendChild(messageElement)
             messageTextarea.value = '';
             messagesScrollbar.scrollTop = messagesScrollbar.scrollHeight;
+            document.querySelector("[data-chat_id='" + chat_id + "'] .chat-content .new-message").textContent
+                = `${message.sender.username}: ${message.content}`;;
         })
         .catch(error => {
             console.log('Error occurred while adding comment:', error);
