@@ -620,13 +620,7 @@ svg {
 }
 
 .left-div {
-    width: 70%; /* Regola la larghezza del primo div a sinistra */
-}
-
-.right-div {
-    background-color: rgba(62, 57, 65, 0.25);
-    width: 30%;
-    border-radius: 20px;
+    width: 100%; /* Regola la larghezza del primo div a sinistra */
 }
 
 #s-box {
