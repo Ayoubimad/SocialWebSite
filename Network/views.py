@@ -16,13 +16,15 @@ from .models import *
 
 @login_required(login_url='login/')
 def home(request):
-    user = request.user
+    user = User.objects.get(id=request.user.id)
+    suggestions = user.get_suggested_followers()
     followed_users = user.follows.all()
     start_date = timezone.now() - timedelta(days=1)
     posts = Post.objects.filter(creator__in=followed_users, date_created__gte=start_date).order_by("-date_created")
     context = {
         'user': user,
         'posts': posts,
+        'suggestions': suggestions
     }
     return render(request=request, template_name='home.html', context=context)
 
@@ -89,15 +91,20 @@ def register_view(request):
 
 @login_required(login_url='login/')
 def saved(request):
+    user = User.objects.get(id=request.user.id)
+    suggestions = user.get_suggested_followers()
     posts = Post.objects.filter(savers=request.user)
     return render(request=request, template_name='saved.html', context={
-        'posts': posts
+        'posts': posts,
+        'suggestions': suggestions
     })
 
 
 @login_required(login_url='login/')
 def profile_view(request, username):
     username = get_object_or_404(User, username=username)
+    user = User.objects.get(id=request.user.id)
+    suggestions = user.get_suggested_followers()
     posts = Post.objects.filter(creator=username).order_by("-date_created")
     chat = Chat.objects.filter(
         Q(participants=username) & Q(participants=request.user)
@@ -109,12 +116,15 @@ def profile_view(request, username):
     return render(request, 'profile.html', {
         'us': username,
         'posts': posts,
-        'chat': chat
+        'chat': chat,
+        'suggestions': suggestions
     })
 
 
 @login_required(login_url='login/')
 def edit_profile(request):
+    user = User.objects.get(id=request.user.id)
+    suggestions = user.get_suggested_followers()
     if request.method == 'POST':
         firstname = request.POST.get('firstname')
         lastname = request.POST.get('lastname')
@@ -144,7 +154,9 @@ def edit_profile(request):
             user.cover = cover
 
         user.save()
-    return render(template_name='edit_profile.html', request=request, context={})
+    return render(template_name='edit_profile.html', request=request, context={
+        "suggestions": suggestions
+    })
 
 
 @login_required(login_url='login/')
@@ -320,8 +332,13 @@ def add_comment(request):
 
 @login_required(login_url='login/')
 def chats(request):
+    user = User.objects.get(id=request.user.id)
+    suggestions = user.get_suggested_followers()
     chats_list = Chat.objects.filter(participants=request.user).order_by("-last_updated")
-    return render(request=request, template_name='chats.html', context={'chats': chats_list})
+    return render(request=request, template_name='chats.html', context={
+        'chats': chats_list,
+        'suggestions': suggestions
+    })
 
 
 @login_required(login_url='login/')
