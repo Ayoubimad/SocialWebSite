@@ -85,25 +85,28 @@
         </button>
         <br>
         <hr>
-        <br>
         <div class="suggestion">
-            {% for suggestion in suggestions %}
-                <li class="suggestion-item suggestion-user" id="s-box">
-                    <a href="{% url 'profile' suggestion.username %}" class="nav-link">
-                        <div class="user_account">
-                            <div class="small-profilepic"
-                                 style="float: left; background-image: url({{ suggestion.profile_pic.url }});"></div>
-                            <div style="height: 2.7vw; margin: auto;">
-                                <div style="margin-top: 4px;">
-                                    <strong>{{ suggestion.first_name }} {{ suggestion.last_name }}</strong>
+            {% if suggestions.count > 0 %}
+                You might know:
+                <hr>
+                {% for suggestion in suggestions %}
+                    <li class="suggestion-item suggestion-user" id="s-box">
+                        <a href="{% url 'profile' suggestion.username %}" class="nav-link">
+                            <div class="user_account">
+                                <div class="small-profilepic"
+                                     style="float: left; background-image: url({{ suggestion.profile_pic.url }});"></div>
+                                <div style="height: 2.7vw; margin: auto;">
+                                    <div style="margin-top: 4px;">
+                                        <strong>{{ suggestion.first_name }} {{ suggestion.last_name }}</strong>
+                                    </div>
+                                    <div class="grey" style="margin-top: 4px;">
+                                        @{{ suggestion.username }}</div>
                                 </div>
-                                <div class="grey" style="margin-top: 4px;">
-                                    @{{ suggestion.username }}</div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
+                        </a>
+                    </li>
+                {% endfor %}
+            {% endif %}
         </div>
         <div style="position: absolute; bottom: 10px;">
             <li class="nav-item sidenav-user">
