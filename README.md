@@ -20,7 +20,7 @@ Il tema del Sito Web è un social network con le funzionalità di base.
 <img width="1493" alt="Screenshot 2023-07-05 alle 18 54 36" src="https://github.com/Ayoubimad/SocialWebSite/assets/82643685/065ba0ca-2f5a-4edb-80a3-06be759dd352">
 
 #### Suggestions example
-<img width="1489" alt="Screenshot 2023-07-07 alle 16 02 53" src="https://github.com/Ayoubimad/SocialWebSite/assets/82643685/542d5e27-5790-470e-938a-d3482710c7c3">
+
 
 
 ## Guida all'installazione:
