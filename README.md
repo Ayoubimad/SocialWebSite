@@ -1,10 +1,8 @@
 # SocialWebSite
-Sito sviluppato per l'esame di Tecnologie Web erogato dall'università di Modena e Reggio Emilia, tenuto dalla professoressa Claudia Canali e dal professore Nicola Capodieci.
-Il sito è puramente a scopo didattico per la verifica delle conoscenze acquisite durante il corso sopra citato.
+Website developed for the Web Technologies exam offered by the University of Modena and Reggio Emilia, taught by Professor Claudia Canali and Professor Nicola Capodieci. The website is purely for educational purposes to assess the knowledge acquired during the aforementioned course.
+## Description:
 
-## Descrizione:
-
-Il tema del Sito Web è un social network con le funzionalità di base.
+The theme of the website is a social network with basic functionalities.
 
 ### Screenshots:
 #### Home page:
@@ -22,13 +20,13 @@ Il tema del Sito Web è un social network con le funzionalità di base.
 #### Suggestions example
 <img width="1489" alt="Screenshot 2023-07-07 alle 16 02 53" src="https://github.com/Ayoubimad/SocialWebSite/assets/82643685/e9a4cbaa-df75-4e98-8f1a-333efb575122">
 
-## Guida all'installazione:
+## Installation Guide:
 
 ##### $ pipenv shell #####
 ##### $ pip install -r requirements.txt #####
 ##### $ python manage.py runserver #####
 
-## Frameworks e linguaggi utilizzati:
+## Frameworks and Languages Used:
 
 <p align="left"> <a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> </p>
 
